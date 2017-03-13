@@ -1,0 +1,7 @@
+[package]
+name = "x86"
+version = "0.1.0"
+authors = ["PixelToast <andre.lipke@gmail.com>"]
+
+[dependencies]
+discord = "0.7.0"
