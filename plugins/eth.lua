@@ -20,24 +20,11 @@ event.listen("command", "thank", function(txt, message)
 		message.channel:bulkDelete(math.min(n, 100))
 		n = n - 100
 	end
-	local ndres = "THANK YOU SO MUCH "
+	local ndres = "I'd like to give a huge thank you to "
 	local spacer = " and "
 	ndres = ndres .. ptxt[1]
-	if ptxt[3] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[3]
-	end
-	if ptxt[5] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[5]
-	end
-	if ptxt[7] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[7]
-	end
-	if ptxt[9] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[9]
+	for i = 2, #ptxt do
+		ndres = ndres .. spacer .. ptxt[i]
 	end
 	return ndres
 end)
@@ -71,104 +58,8 @@ event.listen("command", "say", function(txt, message)
 	local ndres = ""
 	local spacer = " "
 	local ptxt = util.parseArgs(txt)
-	if ptxt[1] then
-		ndres = ndres .. ptxt[1]
-	end
-	if ptxt[2] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[2]
-	end
-	if ptxt[3] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[3]
-	end
-	if ptxt[4] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[4]
-	end
-	if ptxt[5] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[5]
-	end
-	if ptxt[5] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[5]
-	end
-	if ptxt[6] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[6]
-	end
-	if ptxt[7] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[7]
-	end
-	if ptxt[8] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[8]
-	end
-	if ptxt[9] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[9]
-	end
-	if ptxt[10] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[10]
-	end
-	if ptxt[11] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[11]
-	end
-	if ptxt[12] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[12]
-	end
-	if ptxt[13] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[13]
-	end
-	if ptxt[14] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[14]
-	end
-	if ptxt[15] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[15]
-	end
-	if ptxt[16] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[16]
-	end
-	if ptxt[17] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[17]
-	end
-	if ptxt[18] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[18]
-	end
-	if ptxt[19] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[19]
-	end
-	if ptxt[20] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[20]
-	end
-	if ptxt[21] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[21]
-	end
-	if ptxt[22] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[22]
-	end
-	if ptxt[23] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[23]
-	end
-	if ptxt[24] then
-		ndres = ndres .. spacer
-		ndres = ndres .. ptxt[24]
+	for i = 1, #ptxt do
+		ndres = ndres .. spacer .. ptxt[i]
 	end
 	return ndres
 end)
