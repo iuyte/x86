@@ -13,6 +13,15 @@ event.listen("command", "backdoor", function(txt, message)
 	end
 end)
 
+local aluaEnv = setmetatable({
+	util = util,
+	exc = require("exc"),
+	event = require("event"),
+}, {
+	__index = _G,
+	__newindex = _G,
+})
+
 event.listen("command", ">", function(txt, message)
 	x86.requirePerms(message.member, "alua")
 	local chunk, err = loadstring("return " .. txt, "@>")
@@ -24,7 +33,13 @@ event.listen("command", ">", function(txt, message)
 		return err
 	end
 
-	local res = table.pack(xpcall(chunk, debug.traceback))
+	aluaEnv.message = message
+	aluaEnv.member = message.member
+	aluaEnv.user = message.member.user
+	aluaEnv.guild = message.guild
+	aluaEnv.channel = message.channel
+
+	local res = table.pack(xpcall(setfenv(chunk, aluaEnv), debug.traceback))
 	if not res[1] then
 		return res[2]
 	end
@@ -35,4 +50,17 @@ event.listen("command", ">", function(txt, message)
 	end
 
 	return table.concat(o, " | ")
+end)
+
+event.listen("command", "purge", function(txt, message)
+	x86.requirePerms(message.member, "purge")
+	local n = tonumber(txt)
+	if not n or n ~= n or math.floor(n) ~= n or n < 0 or n == math.huge then
+		return "Usage: " .. x86.p.prefix .. "purge <number> ( max 1000 )"
+	end
+	n = math.min(n, 1000)
+	while n > 0 do
+		message.channel:bulkDelete(math.min(n, 100))
+		n = n - 100
+	end
 end)
