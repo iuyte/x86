@@ -130,5 +130,45 @@ event.listen("command", "say", function(txt, message)
 		ndres = ndres .. spacer
 		ndres = ndres .. ptxt[14]
 	end
+	if ptxt[15] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[15]
+	end
+	if ptxt[16] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[16]
+	end
+	if ptxt[17] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[17]
+	end
+	if ptxt[18] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[18]
+	end
+	if ptxt[19] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[19]
+	end
+	if ptxt[20] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[20]
+	end
+	if ptxt[21] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[21]
+	end
+	if ptxt[22] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[22]
+	end
+	if ptxt[23] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[23]
+	end
+	if ptxt[24] then
+		ndres = ndres .. spacer
+		ndres = ndres .. ptxt[24]
+	end
 	return ndres
 end)
