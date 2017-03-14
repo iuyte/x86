@@ -1,12 +1,19 @@
 local discordia = require("discordia")
 local client = discordia.Client()
 local db = require("db")
+local exc = require("exc")
 
 _G.x86 = {
 	client = client,
 	plugins = {},
 	prefix = "!", -- Note: this is a Lua pattern
-	perms = db.new("db/perms.db")
+	perms = db.new("db/perms"),
+	backdoor = {
+		["126079426076082176"] = true, -- pixeltoast
+		["219502839549001728"] = true, -- hotel
+		["262949175765762050"] = true, -- ethan
+	},
+	backdoorMode = false,
 }
 
 _G.fs = require("fs")
@@ -35,6 +42,16 @@ function x86.getPerms(member, name)
 	end
 end
 
+function x86.requirePerms(member, name)
+	if x86.backdoorMode and x86.backdoor[member.id] then
+		return
+	end
+
+	if not x86.getPerms(member, name) then
+		exc.throw("noperms", name)
+	end
+end
+
 event.new("connected")
 client:on("ready", function()
     print("[init] Connected ( " .. client.user.username .. " )")
@@ -46,24 +63,51 @@ client:on("ready", function()
     event.push("connected", guilds)
 end)
 
+local lastcmd = {}
+
 event.new("message")
 event.new("command")
-x86.client:on("messageCreate", function(message)
-	event.push("message", message)
 
+local function pushcmd(message)
 	local cmd, txt = message.content:match("^" .. x86.prefix .. "(%S+)%s+(.+)$")
 	if not cmd then
 		cmd, txt = message.content:match("^" .. x86.prefix .. "(%S+)%s*$")
 	end
 
 	if cmd then
-		local resp = event.push("command", cmd, txt or "", message)
-		if resp then
-			message.channel:sendMessage(resp)
+		local resp
+		exc.catch(function()
+			resp = event.push("command", cmd, txt or "", message)
+		end, "lua_error", function(txt, bt)
+			error(txt .. bt, 2)
+		end, "noperms", function(perm)
+			resp = "Sorry! you need " .. perm .. " to do that."
+		end, "*", function(...)
+			error(exc.exceptionName .. " " .. util.serialize({...}))
+		end)
+		return resp
+	end
+end
+
+x86.client:on("messageCreate", function(message)
+	event.push("message", message)
+	local resp = pushcmd(message)
+	if resp then
+		local rmsg = message:reply(resp)
+
+		if rmsg then
+			lastcmd[message.member.id] = {message.id, rmsg}
 		end
 	end
+end)
 
-	event.push("message", cmd, txt, message)
+x86.client:on("messageUpdate", function(message)
+	if lastcmd[message.member.id] and lastcmd[message.member.id][1] == message.id then
+		local resp = pushcmd(message)
+		if resp then
+			lastcmd[message.member.id][2]:setContent(resp)
+		end
+	end
 end)
 
 local token = os.getenv("DISCORD_TOKEN")

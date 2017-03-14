@@ -1,4 +1,5 @@
 local util = require("util")
+local exc = require("exc")
 
 event.listen("command", "perms", function(txt, message)
 	if not message.member then
@@ -61,6 +62,7 @@ event.listen("command", "perms", function(txt, message)
 	end
 
 	if ptxt[2] == "get" then
+		x86.requirePerms(message.member, "perms:get")
 		if ptxt[4] then -- too many args
 			return "Usage: " .. x86.prefix .. "perms get <user/role> [perm]"
 		end
@@ -120,6 +122,7 @@ event.listen("command", "perms", function(txt, message)
 			return o
 		end
 	elseif ptxt[2] == "set" then
+		x86.requirePerms(message.member, "perms:set")
 		if not ptxt[4] or ptxt[5] then
 			return "Usage: " .. x86.prefix .. "perms set <user/role> perm value"
 		end
@@ -135,6 +138,7 @@ event.listen("command", "perms", function(txt, message)
 			return "Set " .. role.name .. " -> " .. ptxt[3] .. " = " .. util.serialize(ptxt[4])
 		end
 	elseif ptxt[2] == "remove" then
+		x86.requirePerms(message.member, "perms:remove")
 		if ptxt[4] then
 			return "Usage: " .. x86.prefix .. "perms set <user/role> perm value"
 		end

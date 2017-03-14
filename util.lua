@@ -663,4 +663,11 @@ function util.next(t, k)
 	return ((getmetatable(t) or {}).__next or next)(t, k)
 end
 
+function util.pack(...)
+	return {
+		...,
+		n = select("#", ...),
+	}
+end
+
 return util
