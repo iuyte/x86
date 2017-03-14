@@ -6,7 +6,7 @@ local exc = require("exc")
 _G.x86 = {
 	client = client,
 	plugins = {},
-	prefix = "!", -- Note: this is a Lua pattern
+	prefix = "x>", -- Note: this is a Lua pattern
 	perms = db.new("db/perms"),
 	backdoor = {
 		["126079426076082176"] = true, -- pixeltoast
@@ -110,7 +110,7 @@ x86.client:on("messageUpdate", function(message)
 	end
 end)
 
-local token = os.getenv("DISCORD_TOKEN")
+local token = "MjkwOTcwODI1NDM0MDcxMDQw.C6jdmQ.vBPTu7ota-On-sECyF4rIRnwPrk"--os.getenv("DISCORD_TOKEN")
 if not token then
 	print("Please supply a DISCORD_TOKEN environment variable.")
 	return
