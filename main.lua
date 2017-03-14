@@ -110,7 +110,16 @@ x86.client:on("messageUpdate", function(message)
 	end
 end)
 
-local token = "MjkwOTcwODI1NDM0MDcxMDQw.C6jdmQ.vBPTu7ota-On-sECyF4rIRnwPrk"--os.getenv("DISCORD_TOKEN")
+
+local open = io.open
+local function read_file()
+    local file = open("/home/ethan/tokens/x88.txt", "rb") -- r read mode and b binary mode
+    if not file then return nil end
+    local content = file:read "*a" -- *a or *all reads the whole file
+    file:close()
+    return content
+end
+local token = read_file()--os.getenv("DISCORD_TOKEN")
 if not token then
 	print("Please supply a DISCORD_TOKEN environment variable.")
 	return

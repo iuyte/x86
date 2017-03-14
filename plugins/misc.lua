@@ -1,5 +1,5 @@
 event.listen("command", "ping", function(txt, message)
-	return "pong"
+	return "x>pong"
 end)
 
 event.listen("command", "id", function(txt, message)
