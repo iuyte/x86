@@ -1,4 +1,5 @@
 event.listen("command", "ping", function(txt, message)
+	x86.requirePerms(message.member, "pingpong")
 	return "x>pong"
 end)
 
