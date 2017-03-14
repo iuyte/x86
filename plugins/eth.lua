@@ -29,7 +29,7 @@ event.listen("command", "thank", function(txt, message)
 	return ndres
 end)
 
-event.listen("command", "pic", function(txt, message)
+event.listen("command", "picture", function(txt, message)
   x86.requirePerms(message.member, "to be gud")
 	local ptxt = util.parseArgs(txt)
 	if (ptxt[1] ~= "you" and ptxt[1] ~= "karthik") or not ptxt[1] then
@@ -42,10 +42,6 @@ event.listen("command", "pic", function(txt, message)
 	else
 		return "Please choose either me or karthik"
 	end
-end)
-
-event.listen("command", "help", function(txt, message)
-	return "Feel free to help yourself!"
 end)
 
 event.listen("command", "say", function(txt, message)
