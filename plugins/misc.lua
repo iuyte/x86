@@ -1,6 +1,10 @@
 event.listen("command", "ping", function(txt, message)
 	x86.requirePerms(message.member, "pingpong")
-	return "x>pong"
+	return x86.prefix .. "pong"
+end)
+
+event.listen("command", "time", function(txt, message)
+	return message.timestamp
 end)
 
 event.listen("command", "id", function(txt, message)
@@ -10,7 +14,7 @@ end)
 event.listen("command", "help", function(txt, message)
 	return
 	[[Available commands:
-		`x>`: the precursor to all commands
+		]] .. x86.prefix .. [[: the precursor to all commands
 		`help`: display this
 		`id`: return the id of the user
 		`ping`: pong
@@ -21,5 +25,19 @@ event.listen("command", "help", function(txt, message)
 		`picture (karthik/you)`: get a picture of me, or karthik
 		`do <something>`: NO
 		`purge <# of messages>`: purges the specified # of messages
+		`repeat`: toggle repeating of deleted messages
+		`time`: get the timestamp
+		`kek`: gets the number of times kek has been said in my history
 	]]
+end)
+
+event.listen("command", "repeat", function(txt, message)
+	x86.requirePerms(message.member, "purge")
+	if x86.repdel then
+		x86.repdel = false
+		return "Repeating of deleted messages is now OFF"
+	else
+		x86.repdel = true
+		return "Repeating of deleted messages is now ON"
+	end
 end)

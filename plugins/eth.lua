@@ -7,7 +7,7 @@ end)
 
 event.listen("command", "pong", function(txt, message)
 	x86.requirePerms(message.member, "pingpong")
-	return "x>ping"
+	return x86.prefix .. "ping"
 end)
 
 event.listen("command", "thank", function(txt, message)
@@ -58,4 +58,8 @@ event.listen("command", "say", function(txt, message)
 		ndres = ndres .. spacer .. ptxt[i]
 	end
 	return ndres
+end)
+
+event.listen("command", "kek", function(txt, message)
+	return "kek has been said " .. tostring(x86.kek["kekcount"]) .. " times!"
 end)

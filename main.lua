@@ -2,18 +2,21 @@ local discordia = require("discordia")
 local client = discordia.Client()
 local db = require("db")
 local exc = require("exc")
+local repl = false
 
 _G.x86 = {
 	client = client,
 	plugins = {},
-	prefix = "x>", -- Note: this is a Lua pattern
+	prefix = ";", -- Note: this is a Lua pattern
 	perms = db.new("db/perms"),
+	kek = db.new("db/kek"),
 	backdoor = {
 		["126079426076082176"] = true, -- pixeltoast
 		["219502839549001728"] = true, -- hotel
 		["262949175765762050"] = true, -- ethan
 	},
 	backdoorMode = false,
+	repdel = false,
 }
 
 _G.fs = require("fs")
@@ -148,3 +151,36 @@ for k, v in fs.scandirSync("plugins") do
 end
 
 client:run(token)
+
+--[[
+
+client:on("messageCreate", function(message)
+  print(message.channel.name, message.author.username, message.content)
+end)
+
+--[[
+client:on("messageDelete", function(message)
+	if x86.repdel then
+		local msg = message.member.user.mentionString .. " had posted: " .. message.content
+  	message.channel:sendMessage(msg)
+	end
+end)
+--]]
+
+client:on("messageCreate", function(message)
+	--[[]]
+	local j = string.find(message.content, ";kek")
+	if message.member.user.id ~= "291034111944949761" then
+		if j == nil then
+			local t = {}                   -- table to store the indices
+  		local i = 0
+  		while true do
+    		i = string.find(message.content, "kek", i+1)    -- find 'next' newline
+				if i == nil then break end
+    		table.insert(t, i)
+  		end
+			if not x86.kek["kekcount"] then x86.kek["kekcount"] = "0" end
+			x86.kek["kekcount"] = tostring(tonumber(x86.kek["kekcount"]) + table.getn(t))
+		end
+	end
+end)

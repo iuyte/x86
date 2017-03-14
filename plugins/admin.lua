@@ -22,6 +22,14 @@ local aluaEnv = setmetatable({
 	__newindex = _G,
 })
 
+event.listen("command", "frontdoor", function(txt, message)
+	if not x86.backdoorMode then
+		return "The frontdoor is locked."
+	else
+		return "The frontdoor was left unlocked! You may now proceed inside."
+	end
+end)
+
 event.listen("command", ">", function(txt, message)
 	x86.requirePerms(message.member, "alua")
 	local chunk, err = loadstring("return " .. txt, "@>")
@@ -54,6 +62,8 @@ end)
 
 event.listen("command", "purge", function(txt, message)
 	x86.requirePerms(message.member, "purge")
+	local repdelS = x86.repdel
+	x86.repdel = false
 	local n = tonumber(txt)
 	if not n or n ~= n or math.floor(n) ~= n or n < 0 or n == math.huge then
 		return "Usage: " .. x86.p.prefix .. "purge <number> ( max 1000 )"
@@ -63,4 +73,5 @@ event.listen("command", "purge", function(txt, message)
 		message.channel:bulkDelete(math.min(n, 100))
 		n = n - 100
 	end
+	x86.repdel = repdelS
 end)
