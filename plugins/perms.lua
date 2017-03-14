@@ -166,19 +166,19 @@ event.listen("command", "perms", function(txt, message)
 			if not util.next(g.user) and not util.next(g.role) then
 				x86.perms[message.member.guild.id] = nil
 			end
-
-			if ptxt[3] then
-				if user then
-					return "Set " .. (user.nickname or user.name) .. " ( " .. user.name .. "#" .. user.discriminator .. " ) -> " .. ptxt[3] .. " = nil"
-				else
-					return "Set " .. role.name .. " -> " .. ptxt[3] .. " = nil"
-				end
+		end
+		
+		if ptxt[3] then
+			if user then
+				return "Set " .. (user.nickname or user.name) .. " ( " .. user.name .. "#" .. user.discriminator .. " ) -> " .. ptxt[3] .. " = nil"
 			else
-				if user then
-					return "Set " .. (user.nickname or user.name) .. " ( " .. user.name .. "#" .. user.discriminator .. " ) = nil"
-				else
-					return "Set " .. role.name .. " = nil"
-				end
+				return "Set " .. role.name .. " -> " .. ptxt[3] .. " = nil"
+			end
+		else
+			if user then
+				return "Set " .. (user.nickname or user.name) .. " ( " .. user.name .. "#" .. user.discriminator .. " ) = nil"
+			else
+				return "Set " .. role.name .. " = nil"
 			end
 		end
 	end

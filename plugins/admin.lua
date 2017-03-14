@@ -15,9 +15,9 @@ end)
 
 event.listen("command", ">", function(txt, message)
 	x86.requirePerms(message.member, "alua")
-	local chunk, err = loadstring("return " .. txt)
+	local chunk, err = loadstring("return " .. txt, "@>")
 	if not chunk then
-		chunk, err = loadstring(txt)
+		chunk, err = loadstring(txt, "@>")
 	end
 
 	if not chunk then
