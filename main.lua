@@ -170,6 +170,7 @@ end)
 client:on("messageCreate", function(message)
 	--[[]]
 	local j = string.find(message.content, ";kek")
+	local k = string.find(message.content, ";rekt")
 	if message.member.user.id ~= "291034111944949761" then
 		if j == nil then
 			local t = {}                   -- table to store the indices
@@ -181,6 +182,18 @@ client:on("messageCreate", function(message)
   		end
 			if not x86.kek["kekcount"] then x86.kek["kekcount"] = "0" end
 			x86.kek["kekcount"] = tostring(tonumber(x86.kek["kekcount"]) + table.getn(t))
+		end
+
+		if k == nil then
+			local t = {}                   -- table to store the indices
+  		local i = 0
+  		while true do
+    		i = string.find(message.content, "rekt", i+1)    -- find 'next' newline
+				if i == nil then break end
+    		table.insert(t, i)
+  		end
+			if not x86.kek["rekcount"] then x86.kek["rekcount"] = "0" end
+			x86.kek["rekcount"] = tostring(tonumber(x86.kek["rekcount"]) + table.getn(t))
 		end
 	end
 end)
