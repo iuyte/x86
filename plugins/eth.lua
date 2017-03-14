@@ -67,3 +67,7 @@ end)
 event.listen("command", "rekt", function(txt, message)
 	return "rekt has been said " .. tostring(x86.kek["rekcount"]) .. " times!"
 end)
+
+event.listen("command", "lol", function(txt, message)
+	return "Pixel has said lol " .. tostring(x86.kek["lolcount"]) .. " times!"
+end)

@@ -27,7 +27,8 @@ event.listen("command", "help", function(txt, message)
 		`purge <# of messages>`: purges the specified # of messages
 		`repeat`: toggle repeating of deleted messages
 		`time`: get the timestamp
-		`kek`: gets the number of times kek has been said in my history
+		`kek`: gets the number of times kek has been said since someone altered my database
+		`rekt`: gets the number of times rekt has been said since someone altered my database
 	]]
 end)
 

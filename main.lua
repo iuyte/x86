@@ -152,13 +152,7 @@ end
 
 client:run(token)
 
---[[
-
-client:on("messageCreate", function(message)
-  print(message.channel.name, message.author.username, message.content)
-end)
-
---[[
+--[[]]
 client:on("messageDelete", function(message)
 	if x86.repdel then
 		local msg = message.member.user.mentionString .. " had posted: " .. message.content
@@ -169,14 +163,15 @@ end)
 
 client:on("messageCreate", function(message)
 	--[[]]
+	print(message.channel.name, message.author.username, message.content)
 	local j = string.find(message.content, ";kek")
 	local k = string.find(message.content, ";rekt")
 	if message.member.user.id ~= "291034111944949761" then
 		if j == nil then
-			local t = {}                   -- table to store the indices
+			local t = {}
   		local i = 0
   		while true do
-    		i = string.find(message.content, "kek", i+1)    -- find 'next' newline
+    		i = string.find(message.content, "kek", i+1)
 				if i == nil then break end
     		table.insert(t, i)
   		end
@@ -185,15 +180,28 @@ client:on("messageCreate", function(message)
 		end
 
 		if k == nil then
-			local t = {}                   -- table to store the indices
+			local t = {}
   		local i = 0
   		while true do
-    		i = string.find(message.content, "rekt", i+1)    -- find 'next' newline
+    		i = string.find(message.content, "rekt", i+1)
 				if i == nil then break end
     		table.insert(t, i)
   		end
 			if not x86.kek["rekcount"] then x86.kek["rekcount"] = "0" end
 			x86.kek["rekcount"] = tostring(tonumber(x86.kek["rekcount"]) + table.getn(t))
 		end
+
+		if message.member.user.id == "126079426076082176" then
+			local t = {}
+  		local i = 0
+  		while true do
+    		i = string.find(message.content, "lol", i+1)
+				if i == nil then break end
+    		table.insert(t, i)
+  		end
+			if not x86.kek["lolcount"] then x86.kek["lolcount"] = "0" end
+			x86.kek["lolcount"] = tostring(tonumber(x86.kek["lolcount"]) + table.getn(t))
+		end
+
 	end
 end)
