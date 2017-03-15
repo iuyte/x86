@@ -163,7 +163,17 @@ end)
 
 client:on("messageCreate", function(message)
 	--[[]]
-	print(message.channel.name, message.author.username, message.content)
+	local convoLg = io.open("/home/ethan/xdisl/log.txt", "rb")
+	local cont = "spaceholder"
+	if convoLg then
+		cont = convoLg:read("*a")
+		convoLg:close()
+	end
+	local convoLog = open("/home/ethan/xdisl/log.txt", "w")
+	local msg = string.padright(message.timestamp, 20) .. string.padright(message.channel.name, 15) .. string.padright(message.author.username, 15) .. message.content
+	print(msg)
+	convoLog:write(cont .. msg .. "\n")
+	convoLog:close()
 	local j = string.find(message.content, ";kek")
 	local k = string.find(message.content, ";rekt")
 	if message.member.user.id ~= "291034111944949761" then

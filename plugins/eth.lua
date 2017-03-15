@@ -71,3 +71,10 @@ end)
 event.listen("command", "lol", function(txt, message)
 	return "Pixel has said lol " .. tostring(x86.kek["lolcount"]) .. " times!"
 end)
+
+event.listen("command", "join", function(txt, message)
+	x86.requirePerms(message.member, "can say")
+	x86.requirePerms(message.member, "purge")
+	
+	return ""
+end)

@@ -29,6 +29,7 @@ event.listen("command", "help", function(txt, message)
 		`time`: get the timestamp
 		`kek`: gets the number of times kek has been said since someone altered my database
 		`rekt`: gets the number of times rekt has been said since someone altered my database
+		`lol`: gets the number of times Pixel said lol since someone altered my database
 	]]
 end)
 
