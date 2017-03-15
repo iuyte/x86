@@ -3,6 +3,7 @@ local client = discordia.Client()
 local db = require("db")
 local exc = require("exc")
 local repl = false
+local replyOn = true
 
 _G.x86 = {
 	client = client,
@@ -170,8 +171,8 @@ client:on("messageCreate", function(message)
 		convoLg:close()
 	end
 	local convoLog = open("/home/ethan/xdisl/log.txt", "w")
-	local msg = string.padright(message.timestamp, 20) .. string.padright(message.channel.name, 15) .. string.padright(message.author.username, 15) .. message.content
-	print(msg)
+	local msg = string.padright(message.timestamp, 40) .. string.padright(message.channel.name, 15) .. string.padright(message.author.username, 15) .. message.content
+	--print(msg)
 	convoLog:write(cont .. msg .. "\n")
 	convoLog:close()
 	local j = string.find(message.content, ";kek")
@@ -201,7 +202,7 @@ client:on("messageCreate", function(message)
 			x86.kek["rekcount"] = tostring(tonumber(x86.kek["rekcount"]) + table.getn(t))
 		end
 
-		if message.member.user.id == "126079426076082176" then
+		if message.member.user.id == "126079426076082176" or message.member.user.id == "219502839549001728" then --pixeltoast and hotel
 			local t = {}
   		local i = 0
   		while true do
@@ -213,5 +214,16 @@ client:on("messageCreate", function(message)
 			x86.kek["lolcount"] = tostring(tonumber(x86.kek["lolcount"]) + table.getn(t))
 		end
 
+		--[[
+		local contentof = open("/home/ethan/xdisl/say.txt", "rb")
+		local contento = contentof:read("*a")
+		local to = ""
+		j = string.find(contento, "\n", 1)
+		if j then
+
+
+
+		end
+		]]
 	end
 end)

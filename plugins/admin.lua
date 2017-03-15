@@ -62,8 +62,8 @@ end)
 
 event.listen("command", "purge", function(txt, message)
 	x86.requirePerms(message.member, "purge")
-	--local repdelS = x86.repdel
-	--x86.repdel = false
+	local repdelS = x86.repdel
+	x86.repdel = false
 	local n = tonumber(txt)
 	if not n or n ~= n or math.floor(n) ~= n or n < 0 or n == math.huge then
 		return "Usage: " .. x86.p.prefix .. "purge <number> ( max 1000 )"
@@ -73,5 +73,5 @@ event.listen("command", "purge", function(txt, message)
 		message.channel:bulkDelete(math.min(n, 100))
 		n = n - 100
 	end
-	--x86.repdel = repdelS
+	x86.repdel = repdelS
 end)
