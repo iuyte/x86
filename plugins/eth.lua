@@ -71,3 +71,14 @@ end)
 event.listen("command", "lol", function(txt, message)
 	return "Pixel and Hotel have said lol " .. tostring(x86.kek["lolcount"]) .. " times!"
 end)
+
+event.listen("command", "echo", function(txt, message)
+	x86.requirePerms(message.member, "echo")
+	if x86.echoMode[message.channel.id] then
+		x86.echoMode[message.channel.id] = false
+		return "Echoing is now OFF"
+	else
+		x86.echoMode[message.channel.id] = true
+		return "Echoing is now ON"
+	end
+end)

@@ -75,3 +75,7 @@ event.listen("command", "purge", function(txt, message)
 	end
 	x86.repdel = repdelS
 end)
+
+event.listen("command", "ring", function(txt, message)
+	return "DING DONG\n```\n............\n```\nThere's no response"
+end)

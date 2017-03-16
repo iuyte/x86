@@ -17,7 +17,18 @@ _G.x86 = {
 		["262949175765762050"] = true, -- ethan
 	},
 	backdoorMode = false,
-	repdel = false,
+	repdel = {
+		["291595583557206016"] = false,
+	},
+	echoMode = {
+		["291595583557206016"] = false,
+	},
+	--[[
+	doorbell = {
+		["266591702096019459"] = true, -- Enderstar
+		["262949175765762050"] = true, -- ethan
+	},
+	frontdoorMode = false,--]]
 }
 
 _G.fs = require("fs")
@@ -155,7 +166,7 @@ client:run(token)
 
 --[[]]
 client:on("messageDelete", function(message)
-	if x86.repdel then
+	if x86.repdel[message.channel.guild.id] then
 		local msg = message.member.user.mentionString .. " had posted: " .. message.content
   	message.channel:sendMessage(msg)
 	end
@@ -164,6 +175,10 @@ end)
 
 client:on("messageCreate", function(message)
 	--[[]]
+	if x86.echoMode[message.channel.id] and message.member.user.id ~= "291034111944949761" then
+		message.channel:sendMessage(message.content)
+		--message.channel:sendMessage(message.channel.guild.id)
+	end
 	local convoLg = io.open("/home/ethan/xdisl/log.txt", "rb")
 	local cont = "spaceholder"
 	if convoLg then
@@ -172,7 +187,7 @@ client:on("messageCreate", function(message)
 	end
 	local convoLog = open("/home/ethan/xdisl/log.txt", "w")
 	local msg = string.padright(message.timestamp, 40) .. string.padright(message.channel.name, 15) .. string.padright(message.author.username, 15) .. message.content
-	--print(msg)
+	print(msg)
 	convoLog:write(cont .. msg .. "\n")
 	convoLog:close()
 	local j = string.find(message.content, ";kek")
@@ -213,17 +228,5 @@ client:on("messageCreate", function(message)
 			if not x86.kek["lolcount"] then x86.kek["lolcount"] = "0" end
 			x86.kek["lolcount"] = tostring(tonumber(x86.kek["lolcount"]) + table.getn(t))
 		end
-
-		--[[
-		local contentof = open("/home/ethan/xdisl/say.txt", "rb")
-		local contento = contentof:read("*a")
-		local to = ""
-		j = string.find(contento, "\n", 1)
-		if j then
-
-
-
-		end
-		]]
 	end
 end)

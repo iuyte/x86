@@ -14,7 +14,7 @@ end)
 event.listen("command", "help", function(txt, message)
 	return
 	[[Available commands:
-		]] .. x86.prefix .. [[: the precursor to all commands
+		]] .. x86.prefix .. [[ : the precursor to all commands
 		`help`: display this
 		`id`: return the id of the user
 		`ping`: pong
@@ -34,12 +34,12 @@ event.listen("command", "help", function(txt, message)
 end)
 
 event.listen("command", "repeat", function(txt, message)
-	x86.requirePerms(message.member, "purge")
-	if x86.repdel then
-		x86.repdel = false
+	x86.requirePerms(message.member, "repeat")
+	if x86.repdel[message.channel.guild.id] then
+		x86.repdel[message.channel.guild.id] = false
 		return "Repeating of deleted messages is now OFF"
 	else
-		x86.repdel = true
+		x86.repdel[message.channel.guild.id] = true
 		return "Repeating of deleted messages is now ON"
 	end
 end)
